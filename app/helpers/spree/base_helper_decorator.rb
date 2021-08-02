@@ -15,5 +15,20 @@ module Spree
       safe_join(taxons, "\n")
     end
   end
+
+  def link_to_cart(text = nil)
+    text = text ? h(text) : t('spree.cart')
+    css_class = nil
+
+    if current_order.nil? || current_order.item_count.zero?
+      text = "#{text}: (#{t('spree.empty')})"
+      css_class = 'empty'
+    else
+      text = "#{text}: (#{current_order.item_count})  <span class='amount'>#{current_order.display_total.to_html}</span>"
+      css_class = 'full'
+    end
+
+    link_to text.html_safe, spree.cart_path, class: "nav-link cart-info #{css_class}"
+  end
 end
 end
