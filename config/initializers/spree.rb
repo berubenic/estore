@@ -58,6 +58,8 @@ Spree.config do |config|
   #   server: Rails.env.production? ? 'production' : 'test',
   #   test_mode: !Rails.env.production?
   # )
+
+  config.max_level_in_taxons_menu = 2
 end
 
 Spree::Frontend::Config.configure do |config|
